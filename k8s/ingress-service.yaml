@@ -16,7 +16,21 @@ spec:
         - www.abilabi.page
     secretName: abilabi-page
   rules:
-    - http:
+    - host: abilabi.page
+      http:
+        paths:
+          - path: /?(.*)
+            # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 3000
+          - path: /api/?(.*)
+            # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
+    - host: www.abilabi.page
+      http:
         paths:
           - path: /?(.*)
             # UPDATE THIS LINE ABOVE
